@@ -2,6 +2,7 @@ from distutils.ccompiler import show_compilers
 from typing import Union
 
 from fastapi import FastAPI
+import os
 import requests
 import json
 
@@ -60,7 +61,7 @@ def getallStocks():
 
 def getStockPrice (company):
 
-    response = requests.get("https://financialmodelingprep.com/api/v3/quote-short/"+ company +"?apikey=REDACTED")
+    response = requests.get("https://financialmodelingprep.com/api/v3/quote-short/"+ company +"?apikey=" + os.environ["FMP_API_KEY"])
     jresp=response.json()
     print(jresp[0])
     jsonLoad=jresp[0]
